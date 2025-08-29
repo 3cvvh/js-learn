@@ -1,4 +1,7 @@
 //tankap input user
+var lagi = confirm('mau main?');
+while(lagi){
+if(lagi == true){
 var p = prompt('pilih diantara(gajah,semut,orang)');
 //computer
 var c = Math.random();
@@ -26,11 +29,10 @@ if(p == c){
         hasil = 'menang'
     }
 }else{
-    if(c == 'gajah'){
-        hasil = 'menang'
-    }else{
-        hasil = 'kalah'
-    }
+  hasil = (c == 'orang') ? "kalah" : "menang";
 }
 alert(hasil + ' karna comp memasukan: ' + c + " \n yang kamu masukan: " + p)
-console.log(c)
+}
+lagi = confirm('mau main lagi?')
+}
+alert('terimakasih sudah bermain')
