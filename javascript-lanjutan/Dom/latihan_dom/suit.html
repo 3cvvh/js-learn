@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Tambahkan font dan ganti style untuk tampilan yang lebih baik -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Replace existing styles with improved theme (glassmorphism, variables, responsive) */
+        :root{
+            --bg-dark:#071428;
+            --accent:#ff7ab6;
+            --accent-2:#6be3ff;
+            --glass: rgba(255,255,255,0.06);
+            --glass-border: rgba(255,255,255,0.08);
+            --muted: rgba(255,255,255,0.85);
+        }
+        html,body{height:100%;}
+        body{
+            font-family: 'Nunito', Arial, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(255,122,182,0.06), transparent 10%),
+                radial-gradient(circle at 90% 90%, rgba(107,227,255,0.04), transparent 15%),
+                url(img/bg.png);
+            background-size: cover;
+            color:var(--muted);
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            padding:36px 16px 60px;
+            min-height:100vh;
+            box-sizing:border-box;
+        }
+
+        h1{
+            font-family:'Playfair Display', serif;
+            font-size:48px;
+            letter-spacing:1px;
+            margin:8px 0 6px;
+            color:#080606;
+            text-shadow:0 6px 30px rgba(2,6,23,0.6);
+        }
+
+        .subtitle{
+            margin:0 0 18px;
+            color: black;
+            opacity:0.9;
+            font-size:14px;
+        }
+
+        .container{
+            width:760px;
+            max-width:100%;
+            margin:auto;
+            padding:26px;
+            position:relative;
+            box-sizing:border-box;
+            border-radius:20px;
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            box-shadow: 0 10px 40px rgba(2,6,23,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .area-komputer, .area-player{
+            width:100%;
+            height:220px;
+            margin:6px 0;
+            position:relative;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            border-radius:14px;
+            background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            backdrop-filter: blur(4px);
+            border:1px solid var(--glass-border);
+            overflow:visible;
+        }
+
+        .area-komputer{
+            margin-bottom:12px;
+        }
+
+        .info{
+            width:120px;
+            height:120px;
+            border-radius:999px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-weight:800;
+            font-size:28px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.35), 0 2px 8px rgba(107,227,255,0.08);
+            border:4px solid rgba(255,255,255,0.12);
+            z-index:5;
+            animation: pulse 2000ms infinite alternate;
+        }
+
+        @keyframes pulse{
+            from{ transform:translate(-50%,-50%) scale(1); filter:brightness(1); }
+            to{ transform:translate(-50%,-50%) scale(1.04); filter:brightness(1.05); }
+        }
+
+        ul{
+            display:flex;
+            justify-content:center;
+            align-items:flex-end;
+            gap:28px;
+            padding:24px 12px 8px;
+            margin:0;
+        }
+
+        li{ list-style:none; }
+
+        figure{ margin:0; text-align:center; }
+
+        img{
+            width:140px;
+            height:140px;
+            display:block;
+            margin:auto;
+            border-radius:50%;
+            background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+            border:6px solid rgba(255,255,255,0.9);
+            box-shadow: 0 8px 20px rgba(2,6,23,0.5), 0 4px 10px rgba(0,0,0,0.25);
+            transition: transform .22s ease, box-shadow .22s ease;
+            cursor:pointer;
+        }
+
+        figcaption{
+            margin-top:10px;
+            font-size:14px;
+            color:rgba(255,255,255,0.95);
+            font-weight:700;
+            letter-spacing:0.6px;
+            text-shadow:0 2px 6px rgba(2,6,23,0.5);
+        }
+
+        .gajah:hover, .semut:hover, .orang:hover, .active{
+            transform:translateY(-6px) scale(1.04);
+            box-shadow:0 16px 40px rgba(0,0,0,0.45), 0 0 18px rgba(107,227,255,0.06);
+        }
+
+        .gajah:active, .semut:active, .orang:active{
+            transform:translateY(-2px) scale(1.02);
+        }
+
+        .img-komputer{
+            width:160px;
+            height:160px;
+            border-radius:50%;
+            border:8px solid rgba(255,255,255,0.95);
+            background:white;
+            box-shadow: 0 18px 40px rgba(2,6,23,0.55);
+            transition: transform .35s ease;
+        }
+
+        /* New: score badges */
+        .score{
+            position:absolute;
+            top:14px;
+            right:18px;
+            min-width:38px;
+            height:38px;
+            border-radius:999px;
+            background:rgba(0,0,0,0.35);
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-weight:800;
+            font-size:14px;
+            box-shadow:0 6px 18px rgba(2,6,23,0.6), 0 2px 6px rgba(107,227,255,0.06);
+            border:2px solid rgba(255,255,255,0.04);
+            backdrop-filter:blur(4px);
+        }
+
+        .score-komputer{ right:22px; left:auto; }
+        .score-player{ right:22px; left:auto; }
+
+        /* New: subtle sparkle behind container */
+        .container::before{
+            content:"";
+            pointer-events:none;
+            position:absolute;
+            inset:-40%;
+            background:
+                radial-gradient(circle at 10% 20%, rgba(255,122,182,0.04), transparent 6%),
+                radial-gradient(circle at 80% 80%, rgba(107,227,255,0.03), transparent 8%);
+            filter:blur(18px);
+            opacity:0.9;
+            z-index:0;
+        }
+
+        /* Ensure main children sit above decoration */
+        .container > *{ position:relative; z-index:2; }
+
+        /* keyboard focus visible for images */
+        img:focus{
+            outline:3px solid rgba(255,255,255,0.18);
+            outline-offset:6px;
+            transform:translateY(-6px) scale(1.04);
+            box-shadow:0 18px 46px rgba(0,0,0,0.5), 0 0 26px rgba(107,227,255,0.08);
+        }
+
+        /* Slightly reduce figcaption on very small screens */
+        @media (max-width:420px){
+            figcaption{ font-size:12px; margin-top:8px; }
+            .info{ font-size:18px; width:84px; height:84px; }
+        }
+
+        /* responsive */
+        @media (max-width:640px){
+            h1{ font-size:28px; }
+            .info{ width:96px; height:96px; font-size:20px; }
+            img{ width:110px; height:110px; }
+            .img-komputer{ width:120px; height:120px; }
+            .container{ padding:18px; border-radius:14px; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Suwit Jawa v2.0</h1>
+    <p class="subtitle">Pilih salah satu</p>
+
+    <div class="container">
+        <div class="area-komputer">
+            <!-- score badge (static) -->
+            <div class="score score-komputer" aria-hidden="true">0</div>
+            <img src="img/gajah.png" class="img-komputer" alt="pilihan komputer" tabindex="0">
+        </div>
+
+
+        <div class="area-player">
+            <!-- score badge (static) -->
+            <div class="score score-player" aria-hidden="true">0</div>
+            <ul>
+                <li>
+                    <figure>
+                        <img src="img/gajah.png" class="gajah" alt="gajah" tabindex="0">
+                        <figcaption>Gajah</figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="img/orang.png" class="orang" alt="orang" tabindex="0">
+                        <figcaption>Orang</figcaption>
+                    </figure>
+                </li>
+                <li>
+                    <figure>
+                        <img src="img/semut.png" class="semut" alt="semut" tabindex="0">
+                        <figcaption>Semut</figcaption>
+                    </figure>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+</body>
+</html>

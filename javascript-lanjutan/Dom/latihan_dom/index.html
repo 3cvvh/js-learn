@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .changeBg {
+            background-color: lawngreen;
+        }
+        body {
+            justify-items: center;
+        }
+        .Merah {
+            background-color: red;
+        }
+        .kotak {
+            width: 25px;
+            height: 25px;
+            margin: 10px auto;
+        }
+        .hijau {
+            background-color: green;
+        }
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+ 
+    <section>
+    <h1>hello world</h1>
+    <button type="submit" id="ubahWarna">tombol ubah warna</button>
+    <br><br>
+    <div class="kotak Merah"></div>
+    <input type="range" name="silderRed" min="0">
+    <br>
+    <div class="kotak hijau"></div>
+    <input type="range" name="sildergreen" max="255" min="0">
+    <br>
+    </section>
+    
+    <script>
+        const hllo = document.getElementsByTagName('section')[0]
+        const hel2 = hllo.getElementsByTagName('h1')[0]
+        console.log(hel2)
+        const btnUbh1 = document.getElementById('ubahWarna')
+        btnUbh1.addEventListener('click',() => {
+            let nilai1 = Math.round(Math.random() * 255 + 1)
+            let nilai2 = Math.round(Math.random() * 255 + 1)
+            let nilai3 = Math.round(Math.random() * 255 + 1)
+        document.body.style.backgroundColor = 'rgb(' + nilai1 + ',' + nilai2 + ',' + nilai3 + ')'
+        })
+        hel2.addEventListener('click',() => {
+            document.body.classList.toggle('changeBg')
+        })
+    
+        const slider = document.querySelector('section input[name=silderRed]')
+        const greensli = slider.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling
+        slider.setAttribute('max','255')
+        slider.addEventListener('input',() => {
+            let merah = slider.value
+            let green = greensli.value
+            document.body.style.backgroundColor = "rgb(" + merah + ',' + green + ',' + '100'
+        })
+        
+        greensli.addEventListener('input',() => {
+            let merah = slider.value
+            let green = greensli.value
+            document.body.style.backgroundColor = "rgb(" + merah + ',' + green + ',' + '100'
+        })
+        document.body.addEventListener('mousemove',(e) => {
+            let submbuX = Math.round((e.clientX / window.innerHeight) * 255)
+            let sumbuY = Math.round((e.clientY / window.innerHeight) * 255)
+            document.body.style.backgroundColor = 'rgb(' + sumbuY + ',' + submbuX + ',100)'
+        }) 
+        document.body.addEventListener('mouseout',()=>{
+            document.body.style.backgroundColor = 'white'
+        })
+    </script>
+</body>
+</html>
