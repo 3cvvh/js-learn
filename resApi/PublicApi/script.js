@@ -28,23 +28,33 @@ if(e.key == "Enter"){
                      <div class="p-4">
                          <h3 class="text-sm font-semibold text-gray-900 dark:text-gray-100">${e.Title}</h3>
                          <p class="text-xs text-gray-500 mt-1 dark:text-gray-400">${e.Year}</p>
-                   <button data-id=${e.imdbID} id="openModalBtn" class="mt-2 px-3 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300" type="button">
+                   <button data-id=${e.imdbID} class="mt-2 px-3 py-1.5 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-300" type="button">
                         Detail
                     </button>
                      </div>
                  </article>`
              }).join('')
              
-    
+             let anjay =  document.querySelectorAll('button');
+             anjay.forEach((e) => {
+                e.addEventListener('click',function(){
+                    console.log(this.getAttribute('data-id'))
+                    fetch(`http://www.omdbapi.com/?i=${this.getAttribute('data-id')}&apikey=9d0ed2de`)
+                    .then(respone => respone.json() )
+                    .then(respone => {
+                        console.log(respone)
+                    })
+                })
+             })
     })
 }
 })
-moviesGrid.addEventListener('click',key => {
-    console.log(key.target)
-if(key.target.id == 'openModalBtn'){
-console.log(key.target.getAttribute('data-id'))
-fetch(`http://www.omdbapi.com/?i=${key.target.getAttribute('data-id')}&apikey=9d0ed2de`)
-.then(res => res.json())
-.then(res => console.log(res))
-}
-})
+// moviesGrid.addEventListener('click',key => {
+//     console.log(key.target)
+// if(key.target.id == 'openModalBtn'){
+// console.log(key.target.getAttribute('data-id'))
+// fetch(`http://www.omdbapi.com/?i=${key.target.getAttribute('data-id')}&apikey=9d0ed2de`)
+// .then(res => res.json())
+// .then(res => console.log(res))
+// }
+// })
